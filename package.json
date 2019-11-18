@@ -14,10 +14,23 @@
   "author": "Huseyin Gundogdu <hgundogdu53@gmail.com>",
   "license": "ISC",
   "dependencies": {
+    "build": "^0.1.4",
     "cors": "^2.8.5",
     "dotenv": "^8.1.0",
     "express": "^4.17.1",
     "helmet": "^3.21.1",
-    "morgan": "^1.9.1"
+    "knex": "^0.20.2",
+    "migrate": "^1.6.2",
+    "morgan": "^1.9.1",
+    "postgrator": "^3.10.2",
+    "uglify-js": "^3.6.9",
+    "xss": "^1.0.6"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^6.2.2",
+    "nodemon": "^1.19.4",
+    "pg": "^7.12.1",
+    "supertest": "^4.0.2"
   }
 }
