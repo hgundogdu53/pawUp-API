@@ -1,13 +1,14 @@
 {
-  "name": "pawUp-api",
+  "name": "pawup-api",
   "version": "1.0.0",
   "description": "Connect your pets with pets from your neighborhood.",
   "main": "index.js",
   "scripts": {
     "test": "mocha --require test/setup.js",
     "dev": "nodemon src/server.js",
+    "migrate:production": "env SSL=true DATABASE_URL=$(heroku config:get DATABASE_URL) npm run migrate",
     "start": "node src/server.js",
-    "predeploy": "npm audit",
+    "predeploy": "npm run migrate:production",
     "deploy": "git push heroku master"
   },
   "keywords": [],
@@ -23,6 +24,7 @@
     "migrate": "^1.6.2",
     "morgan": "^1.9.1",
     "postgrator": "^3.10.2",
+    "react-dev-utils": "^9.1.0",
     "uglify-js": "^3.6.9",
     "xss": "^1.0.6"
   },
@@ -31,6 +33,7 @@
     "mocha": "^6.2.2",
     "nodemon": "^1.19.4",
     "pg": "^7.13.0",
+    "postgrator-cli": "^3.3.0",
     "supertest": "^4.0.2"
   }
 }
