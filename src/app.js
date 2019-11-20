@@ -24,7 +24,7 @@ app.use('/api/users', usersRouter)
 app.use('/api/auth', authRouter);
 
 app.get('/', (req, res) => {
-    res.send('Hello, world!')
+    res.send('Hello, world!. Be careful')
 })
 
 

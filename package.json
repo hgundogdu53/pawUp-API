@@ -26,6 +26,7 @@
     "knex": "^0.20.2",
     "migrate": "^1.6.2",
     "morgan": "^1.9.1",
+    "pg": "^7.14.0",
     "postgrator": "^3.10.2",
     "react-dev-utils": "^9.1.0",
     "uglify-js": "^3.6.9",
@@ -35,7 +36,6 @@
     "chai": "^4.2.0",
     "mocha": "^6.2.2",
     "nodemon": "^1.19.4",
-    "pg": "^7.13.0",
     "postgrator-cli": "^3.3.0",
     "supertest": "^4.0.2"
   }
