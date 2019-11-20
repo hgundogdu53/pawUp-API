@@ -7,6 +7,13 @@ const { requireAuth } = require('../middleware/basic-auth')
 const usersRouter = express.Router()
 const jsonParser = express.json()
 
+const serializeUser = user => ({
+    id: user.id,
+    first_name: xss(user.first_name),
+    last_name: xss(user.last_name),
+    email: xss(user.email),
+    password: user.password
+})
 
 
 
