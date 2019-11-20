@@ -5,7 +5,7 @@ CREATE TABLE posts (
     location TEXT NOT NULL,
     type_of_pet TEXT NOT NULL,
     hobbies TEXT NOT NULL,
-    owner INTEGER PREFERENCES users
+    owner INTEGER REFERENCES users
 (id) ON
 DELETE CASCADE NOT NULL
 );
