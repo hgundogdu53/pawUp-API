@@ -2,7 +2,7 @@ const path = require('path')
 const express = require('express')
 const xss = require('xss')
 const UsersService = require('./users-service')
-const { requireAuth } = require('../middleware/auth')
+const { requireAuth } = require('../middleware/basic-auth')
 
 const usersRouter = express.Router()
 const jsonParser = express.json()
