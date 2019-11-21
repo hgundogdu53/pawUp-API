@@ -78,8 +78,9 @@ postsRouter
                 res.post = post
                 next()
             })
-            .catch(next => {
-                console.log('catch error posts service getById')
+            .catch(err => {
+                console.log('error getById: ' + err);
+                next;
             })
     })
     .get((req, res, next) => {
@@ -93,26 +94,32 @@ postsRouter
             .then(() => {
                 res.status(204).end()
             })
-            .catch(next)
-    })
-    .patch(requireAuth, jsonParser, (req, res, next) => {
-        const { pet_name, email, type_of_pet, hobbies } = req.body
-        const postToUpdate = { pet_name, email, type_of_pet, hobbies }
-
-        const numberOfValues = Object.values(postToUpdate).filter(Boolean).length
-        if (numberOfValues === 0) {
-            return res.status(400).json({ error: { message: `Request must contain at least one value` } })
-        }
-
-        PostsService.updatePost(
-            req.app.get('db'),
-            req.params.post_id,
-            postToUpdate
-        )
-            .then(numRowsAffected => {
-                res.status(204).end()
+            .catch(err => {
+                console.log('error deleting post DeletePost: ' + err);
+                next;
             })
-            .catch(next)
+            .patch(requireAuth, jsonParser, (req, res, next) => {
+                const { pet_name, email, type_of_pet, hobbies } = req.body
+                const postToUpdate = { pet_name, email, type_of_pet, hobbies }
+
+                const numberOfValues = Object.values(postToUpdate).filter(Boolean).length
+                if (numberOfValues === 0) {
+                    return res.status(400).json({ error: { message: `Request must contain at least one value` } })
+                }
+
+                PostsService.updatePost(
+                    req.app.get('db'),
+                    req.params.post_id,
+                    postToUpdate
+                )
+                    .then(numRowsAffected => {
+                        res.status(204).end()
+                    })
+                    .catch(err => {
+                        console.log('error updatePost: ' + err);
+                        next;
+                    })
+            })
     })
 
 module.exports = postsRouter

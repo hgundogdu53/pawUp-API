@@ -58,7 +58,10 @@ usersRouter
                             })
                     })
             })
-            .catch(next)
+            .catch(err => {
+                console.log('error has user id route / : ' + err);
+                next;
+            })
     })
     .get(requireAuth, (req, res, next) => {
         UsersService.getAllUsers(
@@ -73,7 +76,10 @@ usersRouter
                 res.json(user)
                 next()
             })
-            .catch(next)
+            .catch(err => {
+                console.log('error getAllUsers: ' + err);
+                next;
+            })
     })
 
 usersRouter
@@ -92,8 +98,9 @@ usersRouter
                 res.user = user
                 next()
             })
-            .catch(() => {
-                console.log('user service router')
+            .catch(err => {
+                console.log('error getById route user: ' + err);
+                next;
             })
     })
     .get(requireAuth, (req, res, next) => {
@@ -110,7 +117,10 @@ usersRouter
                 res.json(user)
                 next()
             })
-            .catch(next)
+            .catch(err => {
+                console.log('error getById: ' + err);
+                next;
+            })
     })
     .delete(requireAuth, (req, res, next) => {
         UsersService.deleteUser(
@@ -120,7 +130,10 @@ usersRouter
             .then(numRowsAffected => {
                 res.status(204).end()
             })
-            .catch(next)
+            .catch(err => {
+                console.log('error deleteUser: ' + err);
+                next;
+            })
     })
     .patch(requireAuth, jsonParser, (req, res, next) => {
         const { first_name, last_name, email } = req.body
@@ -142,6 +155,9 @@ usersRouter
             .then(numRowsAffected => {
                 res.status(204).end()
             })
-            .catch(next)
+            .catch(err => {
+                console.log('error updateUser: ' + err);
+                next;
+            })
     })
 module.exports = usersRouter
