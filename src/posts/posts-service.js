@@ -15,6 +15,7 @@ const PostsService = {
         return knex.from('posts').select('*').where('owner', owner_id)
     },
     getById(knex, id) {
+        console.log('postservice.getById id:', id);
         return knex.from('posts').select('*').where('id', id).first()
     },
     deletePost(knex, id) {

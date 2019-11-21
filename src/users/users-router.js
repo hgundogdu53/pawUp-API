@@ -92,7 +92,9 @@ usersRouter
                 res.user = user
                 next()
             })
-            .catch(next)
+            .catch(() => {
+                console.log('user service router')
+            })
     })
     .get(requireAuth, (req, res, next) => {
         UsersService.getById(

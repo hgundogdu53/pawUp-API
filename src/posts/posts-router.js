@@ -67,6 +67,7 @@ postsRouter
 postsRouter
     .route('/:post_id')
     .all((req, res, next) => {
+        console.log('db: ', req.app.get('db'));
         PostsService.getById(req.app.get('db'), req.params.post_id)
             .then(post => {
                 if (!post) {

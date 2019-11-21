@@ -17,6 +17,7 @@ const UsersService = {
             .then(([user]) => user)
     },
     getById(knex, id) {
+        console.log('user service. getbyid')
         return knex
             .from('users')
             .select('*')
