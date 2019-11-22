@@ -1,7 +1,7 @@
 const PostsService = {
     getAllPosts(knex) {
         //return knex.select('*').from('posts');
-        return knex.from('posts').join('users', 'users.id', 'posts.owner')
+        return knex.select('posts.id', 'posts.pet_name', 'users.email', 'posts.birthdate', 'posts.type_of_pet', 'posts.hobbies', 'posts.owner').from('posts').join('users', 'users.id', 'posts.owner')
 
     },
     insertPost(knex, newPost) {
