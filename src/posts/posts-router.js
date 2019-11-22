@@ -13,7 +13,7 @@ const serializePost = post => ({
     email: xss(post.email),
     type_of_pet: xss(post.type_of_pet),
     birthdate: post.birthdate,
-    hobbies: xss(post.lifestyle),
+    hobbies: xss(post.hobbies),
     owner: post.owner
 })
 
