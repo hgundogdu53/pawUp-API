@@ -24,7 +24,10 @@ postsRouter
             .then(posts => {
                 res.json(posts.map(serializePost))
             })
-            .catch(next);
+            .catch(err => {
+                console.log('error getting posts using getAllPosts: ' + err);
+                next;
+            });
     })
     .post(requireAuth, jsonParser, (req, res, next) => {
         const owner = req.user.id;
