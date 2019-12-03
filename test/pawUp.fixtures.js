@@ -1,5 +1,5 @@
 
-function makeDogPostArray() {
+function makePetPostArray() {
     return [
         {
             id: 1,
@@ -47,6 +47,6 @@ function makeMaliciousPost() {
 }
 
 module.exports = {
-    makeDogPostArray,
+    makePetPostArray,
     makeMaliciousPost
 }

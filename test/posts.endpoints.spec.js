@@ -1,10 +1,10 @@
 const knex = require('knex');
 const app = require('../src/app');
 const {
-    makeDogPostArray,
+    makePetPostArray,
     makeMaliciousPost
 } = require('./pawUp.fixtures.js');
-const { makeUserArray } = require('./users.fixtures');
+const { makeUsersArray } = require('./users.fixtures');
 
 describe('Posts Endpoints', () => {
     let db;
@@ -17,11 +17,12 @@ describe('Posts Endpoints', () => {
         app.set('db', db)
     });
 
-    after('disconnect from db', () => db.destroy());
+    before('cleanup', () => db.raw('TRUNCATE TABLE todo RESTART IDENTITY;'));
 
-    before(() => db("posts").truncate());
+    afterEach('cleanup', () => db.raw('TRUNCATE TABLE todo RESTART IDENTITY;'));
 
-    afterEach(() => db("posts").truncate());
+    after('disconnect from the database', () => db.destroy());
+
 
     describe('GET /api/posts', () => {
         context('given no posts', () => {
@@ -33,8 +34,8 @@ describe('Posts Endpoints', () => {
         });
 
         context('given there are posts in the database', () => {
-            const testUsers = makeUserArray();
-            const testPosts = makeDogPostArray();
+            const testUsers = makeUsersArray();
+            const testPosts = makePetPostArray();
 
             beforeEach('insert posts', () => {
                 return db.into('posts').insert(testUsers).then(() => {
@@ -68,9 +69,10 @@ describe('Posts Endpoints', () => {
                     .get(`/api/posts`)
                     .expect(200)
                     .expect(res => {
-                        expect(unescape(res.body[0].pet_name)).to.eql(expectedPost.pet_name);
-                        expect(res.body[0].birthdate).to.eql(expectedPost.birthdate);
+                        expect(res.body[0].pet_name).to.eql(expectedPost.pet_name);
                         expect(res.body[0].type_of_pet).to.eql(expectedPost.type_of_pet);
+                        expect(res.body[0].birthdate).to.eql(expectedPost.birthdate);
+                        expect(res.body[0].location).to.eql(expectedPost.location);
                         expect(res.body[0].hobbies).to.eql(expectedPost.hobbies);
                     });
             });
