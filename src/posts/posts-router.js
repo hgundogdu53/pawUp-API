@@ -31,9 +31,8 @@ postsRouter
     })
     .post(requireAuth, jsonParser, (req, res, next) => {
         const owner = req.user.id;
-        const email = req.user.email;
-        const { pet_name, type_of_pet, birthdate, hobbies } = req.body;
-        const newPost = { pet_name, email, type_of_pet, birthdate, hobbies, owner }
+        const { pet_name, type_of_pet, birthdate, location, hobbies } = req.body;
+        const newPost = { pet_name, type_of_pet, birthdate, location, hobbies, owner }
 
         for (const [key, value] of Object.entries(newPost))
             if (value == null)
