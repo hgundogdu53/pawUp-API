@@ -54,7 +54,7 @@ postsRouter
             });
     })
 postsRouter
-    .route('/myPosts')
+    .route('/posts/myPosts')
     .get(requireAuth, jsonParser, (req, res, next) => {
         const owner = req.user.id;
         PostsService.getByOwnerId(req.app.get('db'), owner)
