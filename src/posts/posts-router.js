@@ -57,6 +57,7 @@ postsRouter
     .route('/myPosts')
     .get(requireAuth, jsonParser, (req, res, next) => {
         const owner = req.user.id;
+        console.log('owner= ' + owner)
         PostsService.getByOwnerId(req.app.get('db'), owner)
             .then(posts => {
                 res.json(posts.map(serializePost))
